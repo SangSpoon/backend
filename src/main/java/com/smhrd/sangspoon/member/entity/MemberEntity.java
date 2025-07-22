@@ -24,7 +24,10 @@ public class MemberEntity {
     private String loginId;
     private String password;
     private String email;
+
+    @Enumerated(EnumType.STRING)
     private Gender gender;
+
     private String company;
     private LocalDate dateOfBirth;
 
