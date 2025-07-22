@@ -3,6 +3,7 @@ package com.smhrd.sangspoon.member.service;
 import com.smhrd.sangspoon.member.entity.MemberEntity;
 import com.smhrd.sangspoon.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,6 +11,9 @@ public class MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // 회원가입
     public void registerMember(MemberEntity member) {
@@ -23,6 +27,9 @@ public class MemberService {
             throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
         }
 
+        // 비밀번호 암호화
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
+
         memberRepository.save(member);
     }
 
@@ -30,7 +37,8 @@ public class MemberService {
     public MemberEntity login(String loginId, String password){
         MemberEntity member = memberRepository.findByLoginId(loginId);
 
-        if (member != null && member.getPassword().equals(password)) {
+        // 암호화 된 비밀번호와 비교
+        if (member != null && passwordEncoder.matches(password, member.getPassword())) {
             return member;
         }
         else {
