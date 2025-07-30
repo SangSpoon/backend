@@ -18,14 +18,14 @@ public class ParsedDataEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private long waterLevel;
-    private long chemicalLevel;
+    private double waterLevel;
+    private double chemicalLevel;
     private int motorStatus1;
     private int motorStatus2;
-    private long flowRate;
-    private long totalAmount;
+    private double flowRate;
+    private double totalAmount;
 
     @OneToOne
-    @JoinColumn(name = "sensor_data_id", nullable = false)
+    @JoinColumn(name = "sensor_data_id", unique = true, nullable = false)
     private SensorDataEntity sensor;
 }

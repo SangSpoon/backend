@@ -21,9 +21,9 @@ public class SiteEntity {
     private String siteName;
     private String contactNumber;
     private TankType tankType;
-    private long length; // 가로
-    private long width; // 세로
-    private long height; // 높이
+    private double length; // 가로
+    private double width; // 세로
+    private double height; // 높이
     private Status status;
 
     @ManyToOne
