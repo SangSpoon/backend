@@ -5,36 +5,34 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDate;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Table(name="member")
 public class MemberEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    private String name;
-    private String loginId;
-    private String password;
-    private String email;
-
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
-
-    private String company;
-    private LocalDate dateOfBirth;
-
-
-    // 멤버 성별 - 남,여
-    public enum Gender {
-        M, F
-    }
+    @Column(nullable = false)
+    private String name;           // 이름
+    
+    @Column(nullable = false, unique = true)
+    private String loginId;        // 아이디
+    
+    @Column(nullable = false, unique = true)
+    private String email;          // 이메일
+    
+    @Column(nullable = false)
+    private String phoneNumber;    // 전화번호
+    
+    @Column(nullable = false)
+    private String password;       // 비밀번호
 }
 

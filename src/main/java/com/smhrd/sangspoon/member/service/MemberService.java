@@ -26,6 +26,11 @@ public class MemberService {
         if(memberRepository.findByEmail(member.getEmail()) != null) {
             throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
         }
+        
+        // 전화번호 중복 검사
+        if(memberRepository.findByPhoneNumber(member.getPhoneNumber()) != null) {
+            throw new IllegalArgumentException("이미 존재하는 전화번호입니다.");
+        }
 
         // 비밀번호 암호화
         member.setPassword(passwordEncoder.encode(member.getPassword()));

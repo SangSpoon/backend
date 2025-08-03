@@ -12,4 +12,7 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
 
     // 이메일 중복 체크
     MemberEntity findByEmail(String email);
+    
+    // 전화번호 중복 체크
+    MemberEntity findByPhoneNumber(String phoneNumber);
 }
